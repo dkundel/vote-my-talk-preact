@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './components/Header';
 import Resources from './components/Resources';
+import { submitVote } from './lib/voting';
 
 class App extends Component {
   constructor(props) {
@@ -13,8 +15,6 @@ class App extends Component {
   }
 
   async submitRating() {
-    const url =
-      'https://cors-anywhere.herokuapp.com/https://dramatic-sidewalk-3548.twil.io/vote-talk';
     const event = 'reactalicante-webcomponents';
     const vote = this.state.currentValue;
     if (this.state.submitted) {
@@ -22,14 +22,7 @@ class App extends Component {
     }
 
     try {
-      const body = JSON.stringify({ vote, event });
-      const resp = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body,
-      });
-      console.log(resp);
-      localStorage.setItem('voted', 'true');
+      await submitVote(event, vote);
       this.setState({ submitted: true });
     } catch (err) {
       console.error(err);
@@ -37,22 +30,12 @@ class App extends Component {
   }
 
   render() {
-    const { submitted } = this.state;
+    // const { submitted } = this.state;
+    const submitted = false;
 
     return (
       <div className="main">
-        <h1>Thanks for watching my talk!</h1>
-        <img
-          src="https://media.giphy.com/media/l3V0lsGtTMSB5YNgc/giphy.gif"
-          alt="daning panda GIF"
-        />
-        <p className="tag-line">
-          I would really appreciate your feedback. Please click on the amount of{' '}
-          <span role="img" aria-label="panda">
-            🐼
-          </span>{' '}
-          you would award for this talk!
-        </p>
+        <Header />
         {!submitted && (
           <button onClick={this.submitRating}>Submit Rating</button>
         )}
