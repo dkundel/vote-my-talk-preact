@@ -42,10 +42,7 @@ class App extends Component {
     return (
       <div className="main">
         <Header />
-        <emoji-rating
-          onClick={this.handleValueChange}
-          value={this.state.currentValue}
-        />
+        <emoji-rating onClick={this.handleValueChange} />
         {!submitted && (
           <button onClick={this.submitRating}>Submit Rating</button>
         )}
