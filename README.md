@@ -1,4 +1,4 @@
-# Vote My Talk
+# Vote My Talk (Final Version)
 
 This project has been created with [`create-react-app`](https://npm.im/create-react-app) and uses [`react-app-rewired`](https://npm.im/react-app-rewired).
 
