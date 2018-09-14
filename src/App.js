@@ -12,6 +12,7 @@ class App extends Component {
       submitted: Boolean(localStorage.getItem('voted')) || false,
     };
     this.submitRating = this.submitRating.bind(this);
+    this.handeVoteChange = this.handeVoteChange.bind(this);
   }
 
   async submitRating() {
@@ -29,6 +30,11 @@ class App extends Component {
     }
   }
 
+  handeVoteChange(event) {
+    const currentValue = event.target.value;
+    this.setState({ currentValue });
+  }
+
   render() {
     // const { submitted } = this.state;
     const submitted = false;
@@ -36,6 +42,7 @@ class App extends Component {
     return (
       <div className="main">
         <Header />
+        <emoji-rating onChange={this.handeVoteChange} />
         {!submitted && (
           <button onClick={this.submitRating}>Submit Rating</button>
         )}
